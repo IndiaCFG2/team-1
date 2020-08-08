@@ -111,7 +111,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             _userEmail = value;
                           },
                         ),
-                        if (!_isLogin)
                           SizedBox(
                             height: 20,
                           ),
