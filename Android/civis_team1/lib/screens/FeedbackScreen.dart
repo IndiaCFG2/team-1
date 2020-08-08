@@ -8,7 +8,7 @@ class FeedbackScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String,Object> selected=ModalRoute.of(context).settings.arguments;
     String selectedId = selected['selectedPolicy'];
-    print(selectedId);
+    // print(selectedId);
     return DefaultTabController(
         length: 2,
         child: Scaffold(

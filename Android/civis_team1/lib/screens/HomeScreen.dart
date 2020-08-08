@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  static const String routeName = "HomePage";
+  static const String routeName = "/HomePage";
   @override
   _HomePageState createState() => _HomePageState();
 }

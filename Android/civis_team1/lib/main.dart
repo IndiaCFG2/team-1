@@ -4,6 +4,7 @@ import 'package:civis_team1/screens/AuthScreen.dart';
 import 'package:civis_team1/screens/FeedbackScreen.dart';
 import 'package:civis_team1/screens/HomeScreen.dart';
 import 'package:civis_team1/screens/PolicyDetailScreen.dart';
+import 'package:civis_team1/screens/SuccessPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomePage.routeName: (ctx) => HomePage(),
           PolicyDetailScreen.routeName: (ctx) => PolicyDetailScreen(),
-          FeedbackScreen.routeName : (ctx) => FeedbackScreen()
+          FeedbackScreen.routeName : (ctx) => FeedbackScreen(),
         },
       ),
     );

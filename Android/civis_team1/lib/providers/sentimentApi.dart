@@ -22,14 +22,17 @@ class SentimentApi with ChangeNotifier{
     }));
     print("api response------------");
     print(json.decode(response.body));
+    var resp = json.decode(response.body);
      Firestore.instance.collection('policies').document(id).collection('subjective_response').add({
-
+        'message':message,
+        'negative':resp['result']['Negative'],
+        'neutral':resp['result']['Neutral'],
+        'positive':resp['result']['Postive']
     });
     }
     catch(error){
       print(error);
     }
-    
     notifyListeners();
   }
 }
