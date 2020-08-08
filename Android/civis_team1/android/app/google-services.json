@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "957238179351",
+    "firebase_url": "https://cfg-team-1.firebaseio.com",
+    "project_id": "cfg-team-1",
+    "storage_bucket": "cfg-team-1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957238179351:android:1a693c0df9095e0c29ce52",
+        "android_client_info": {
+          "package_name": "com.example.civis_team1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "957238179351-imamosi3aghhhoa9pjaboe7j27rq3am4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiUw04iz5Hdaz-ND4ehbq6JzF1PDyjIeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "957238179351-imamosi3aghhhoa9pjaboe7j27rq3am4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
