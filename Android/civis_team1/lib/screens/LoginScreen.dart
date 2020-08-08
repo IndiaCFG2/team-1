@@ -1,3 +1,4 @@
+import 'package:civis_team1/utils/data.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -11,6 +12,10 @@ class LoginScreen extends StatefulWidget {
     String email,
     String password,
     String userName,
+    String age,
+    String gender,
+    String prof,
+    String region,
     bool isLogin,
     BuildContext ctx,
   ) submitFn;
@@ -25,6 +30,14 @@ class _LoginScreenState extends State<LoginScreen> {
   var _userEmail = '';
   var _userName = '';
   var _userPassword = '';
+  var _userAge = '';
+  var _userProf = '';
+  var _userRegion = '';
+  var _userGender = '';
+  String _selectedGender;
+  String _selectedRegion;
+  List<String> _genders = Data.gender;
+  List<String> _regions = Data.regions;
 
   void _trySubmit() {
     final isValid = _formKey.currentState.validate();
@@ -32,8 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
     if (isValid) {
       _formKey.currentState.save();
-      widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(),
-          _isLogin, context);
+      widget.submitFn(_userEmail.trim(), _userPassword.trim(), _userName.trim(),_userAge.trim(),_userGender,_userProf,_userRegion,_isLogin, context);
     }
   }
 
@@ -58,6 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   margin: EdgeInsets.all(25),
 
                   //============ Form  ===========
+
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -114,6 +127,105 @@ class _LoginScreenState extends State<LoginScreen> {
                           SizedBox(
                             height: 20,
                           ),
+
+                          // =========Age
+
+                          if (!_isLogin)
+                          TextFormField(
+                            cursorColor: Theme.of(context).cursorColor,
+                            decoration: InputDecoration(
+                              labelText: 'Age',
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            key: ValueKey('age'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'This field is mandatory';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _userAge = value;
+                            },
+                          ),
+                          SizedBox(
+                          height: 20,
+                        ),
+                        
+                        // ========= Prof
+
+                          if (!_isLogin)
+                          TextFormField(
+                            cursorColor: Theme.of(context).cursorColor,
+                            decoration: InputDecoration(
+                              labelText: 'Profession',
+                              border: new OutlineInputBorder(
+                                borderRadius: new BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            key: ValueKey('prof'),
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'This field is mandatory';
+                              }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _userProf = value;
+                            },
+                          ),
+                          SizedBox(
+                          height: 20,
+                        ),
+
+                        // ========= Gender
+
+                        if (!_isLogin)
+                        Center(
+                        child: DropdownButton(
+                          hint: Text('Gender'),
+                          value: _selectedGender,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedGender = newValue;
+                              _userGender=newValue;
+                            });
+                          },
+                          items: _genders.map((role) {
+                            return DropdownMenuItem(
+                              child: new Text(role),
+                              value: role,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                        // ========= Region
+
+                        if (!_isLogin)
+                        Center(
+                        child: DropdownButton(
+                          hint: Text('Region'),
+                          value: _selectedRegion,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _selectedRegion = newValue;
+                              _userRegion=newValue;
+                            });
+                          },
+                          items: _regions.map((role) {
+                            return DropdownMenuItem(
+                              child: new Text(role),
+                              value: role,
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                      // ========= Password
+
                         TextFormField(
                           cursorColor: Theme.of(context).cursorColor,
                           maxLength: 20,
@@ -139,6 +251,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         SizedBox(
                           height: 20,
                         ),
+
                         // TextFormField(
                         //   cursorColor: Theme.of(context).cursorColor,
                         //   maxLength: 20,
@@ -164,6 +277,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         // SizedBox(
                         //   height: 20,
                         // ),
+
+                        // ========= Buttons
+
                         if (widget.isLoading) CircularProgressIndicator(),
                         if (!widget.isLoading)
                          RaisedButton(
