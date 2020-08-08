@@ -52,6 +52,7 @@ class _AuthScreenState extends State<AuthScreen> {
           'age':age,
           'gender':gender,
           'proffesion':prof,
+          'region':region,
         });
       }
     } on PlatformException catch (err) {

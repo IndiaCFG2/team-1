@@ -26,5 +26,6 @@ class SentimentApi with ChangeNotifier{
       print(error);
     }
     
+    notifyListeners();
   }
 }

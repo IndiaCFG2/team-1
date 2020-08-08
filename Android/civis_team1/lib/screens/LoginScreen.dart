@@ -99,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _userName = value;
                             },
                           ),
+                          if (!_isLogin)
                           SizedBox(
                           height: 20,
                         ),
@@ -124,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             _userEmail = value;
                           },
                         ),
+                        if (!_isLogin)
                           SizedBox(
                             height: 20,
                           ),
@@ -150,6 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _userAge = value;
                             },
                           ),
+                          if (!_isLogin)
                           SizedBox(
                           height: 20,
                         ),
@@ -176,6 +179,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               _userProf = value;
                             },
                           ),
+                          // if (!_isLogin)
                           SizedBox(
                           height: 20,
                         ),
