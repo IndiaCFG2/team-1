@@ -1,8 +1,10 @@
+import 'package:civis_team1/providers/sentimentApi.dart';
 import 'package:civis_team1/screens/PolicyDetailScreen.dart';
 import 'package:civis_team1/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = "HomePage";
@@ -32,6 +34,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // Provider.of<SentimentApi>(context,listen: false).sentimentApi("this is bad");
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
@@ -41,14 +44,18 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: StreamBuilder(
-            stream: Firestore.instance.collection('policies').snapshots(),
+
+            // should update with region
+            stream: Firestore.instance.collection('policies').orderBy('timestamp',descending: true).snapshots(),
             builder: (ctx, userSnapshot) {
               if (userSnapshot.connectionState == ConnectionState.waiting) {
                 return Center(child: Text('Loading..'));
               }
               final document = userSnapshot.data.documents;
               if (document.length == 0) {
-                return Center(child: Text("no Policy added yet"));
+                return Center(
+                  child: Text('Policies not added yet'),
+                );
               }
 
               return ListView.builder(
@@ -57,7 +64,6 @@ class _HomePageState extends State<HomePage> {
                   print("doc ID:" + userSnapshot.toString());
                   DocumentSnapshot singleDoc = document[index];
                   print(singleDoc.documentID);
-                  var sr_status = document[index]['sr_no'];
                   return Column(
                     children: <Widget>[
                       InkWell(
