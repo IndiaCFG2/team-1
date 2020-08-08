@@ -3,8 +3,12 @@ import 'package:civis_team1/widgets/SubjectiveForm.dart';
 import 'package:flutter/material.dart';
 
 class FeedbackScreen extends StatelessWidget {
+  static const routeName = 'feedback';
   @override
   Widget build(BuildContext context) {
+    Map<String,Object> selected=ModalRoute.of(context).settings.arguments;
+    String selectedId = selected['selectedPolicy'];
+    print(selectedId);
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -16,7 +20,7 @@ class FeedbackScreen extends StatelessWidget {
             ),
           ),
           body: TabBarView(children: [
-            SubjectiveForm(),
+            SubjectiveForm(selectedId),
             ObjectiveForm(),
           ]),
         ),

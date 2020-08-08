@@ -76,7 +76,7 @@ class _HomePageState extends State<HomePage> {
 
             stream: Firestore.instance
                 .collection('policies')
-                .where('region', isEqualTo: 'telangana')
+                // .where('region', isEqualTo: 'telangana')
                 .orderBy('timestamp', descending: true)
                 .snapshots(),
             builder: (ctx, userSnapshot) {
@@ -101,7 +101,12 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           onTap: () {
                             Navigator.of(context)
-                                .pushNamed(PolicyDetailScreen.routeName);
+                                .pushNamed(PolicyDetailScreen.routeName,arguments: {
+                                  'title':document[index]['title'],
+                                  'region':document[index]['region'],
+                                  'description':document[index]['description'],
+                                  'clickedid':document[index].documentID,
+                                });
                           },
                           child: buildListTile(
                             index + 1,

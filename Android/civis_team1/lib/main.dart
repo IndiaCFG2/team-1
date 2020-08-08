@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomePage.routeName: (ctx) => HomePage(),
           PolicyDetailScreen.routeName: (ctx) => PolicyDetailScreen(),
+          FeedbackScreen.routeName : (ctx) => FeedbackScreen()
         },
       ),
     );
