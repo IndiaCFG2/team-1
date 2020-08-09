@@ -1,8 +1,10 @@
 import 'package:civis_team1/providers/fetchUser.dart';
 import 'package:civis_team1/providers/sentimentApi.dart';
 import 'package:civis_team1/screens/AuthScreen.dart';
+import 'package:civis_team1/screens/FeedbackScreen.dart';
 import 'package:civis_team1/screens/HomeScreen.dart';
 import 'package:civis_team1/screens/PolicyDetailScreen.dart';
+import 'package:civis_team1/screens/SuccessPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +28,8 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.indigo,
           accentColor: Colors.amber,
         ),
-        home: StreamBuilder(
+        home:
+        StreamBuilder(
             stream: FirebaseAuth.instance.onAuthStateChanged,
             builder: (ctx, userSnapshot) {
               if (userSnapshot.hasData) {
@@ -37,6 +40,7 @@ class MyApp extends StatelessWidget {
         routes: {
           HomePage.routeName: (ctx) => HomePage(),
           PolicyDetailScreen.routeName: (ctx) => PolicyDetailScreen(),
+          FeedbackScreen.routeName : (ctx) => FeedbackScreen(),
         },
       ),
     );

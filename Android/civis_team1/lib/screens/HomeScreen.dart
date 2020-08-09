@@ -7,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  static const String routeName = "HomePage";
+  static const String routeName = "/HomePage";
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -16,27 +16,24 @@ class _HomePageState extends State<HomePage> {
   final _userInstance = Firestore.instance;
 
   String uid;
-  bool _isLoading = false;
-  bool _isinit = true;
-  DocumentSnapshot userFetched ;
 
+  var _isLoading = false;
+  var _isinits = true;
   @override
   void didChangeDependencies() async {
     setState(() {
       _isLoading = true;
     });
-    if (_isinit) {
+    if (_isinits) {
       print("before calling fetch:");
-      var user = Provider.of<FetchUser>(context, listen: false).fetchUser(uid);
-
-      userFetched =Provider.of<FetchUser>(context, listen: false).userFetched;
-      
-      print(userFetched.data);
+      final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+      final uid = user.uid;
+      print(uid);
       setState(() {
         _isLoading = false;
       });
     }
-    _isinit = false;
+    _isinits = false;
     super.didChangeDependencies();
   }
 
@@ -58,7 +55,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth _auth = FirebaseAuth.instance;
-    
+
+    // var user=Provider.of<FetchUser>(context,listen: false).fetchUser(uid);
+    // QuerySnapshot userFetched=Provider.of<FetchUser>(context,listen: false).userFetched;
+    // print(userFetched.documents.toString());
+
     // Provider.of<SentimentApi>(context,listen: false).sentimentApi("this is bad");
     // final userRegion =await Firestore.instance.collection('users').document(uid).get();
     return Scaffold(
@@ -66,15 +67,16 @@ class _HomePageState extends State<HomePage> {
         title: Text('Home'),
       ),
       drawer: DrawerUi(),
-      body: 
-      _isLoading?Center(child: Text('Loading....'),):
-      Center(
+      body: Center(
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20),
           child: StreamBuilder(
+            // user=FirebaseAuth.instance.currentUser()
+            // should update with region
+
             stream: Firestore.instance
                 .collection('policies')
-                .where('region', isEqualTo: 'telangana')
+                // .where('region', isEqualTo: 'telangana')
                 .orderBy('timestamp', descending: true)
                 .snapshots(),
             builder: (ctx, userSnapshot) {
@@ -99,7 +101,12 @@ class _HomePageState extends State<HomePage> {
                         InkWell(
                           onTap: () {
                             Navigator.of(context)
-                                .pushNamed(PolicyDetailScreen.routeName);
+                                .pushNamed(PolicyDetailScreen.routeName,arguments: {
+                                  'title':document[index]['title'],
+                                  'region':document[index]['region'],
+                                  'description':document[index]['description'],
+                                  'clickedid':document[index].documentID,
+                                });
                           },
                           child: buildListTile(
                             index + 1,

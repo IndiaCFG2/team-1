@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SentimentApi with ChangeNotifier{
   String feedback;
@@ -10,7 +11,7 @@ class SentimentApi with ChangeNotifier{
   Float negative;
   Float neutral;
 
-  Future<void> sentimentApi(String message) async{
+  Future<void> sentimentApi(String message,String id) async{
     try{
       final response = await http.post('http://18.197.5.99:5000/',
       headers: {
@@ -21,11 +22,17 @@ class SentimentApi with ChangeNotifier{
     }));
     print("api response------------");
     print(json.decode(response.body));
+    var resp = json.decode(response.body);
+     Firestore.instance.collection('policies').document(id).collection('subjective_response').add({
+        'message':message,
+        'negative':resp['result']['Negative'],
+        'neutral':resp['result']['Neutral'],
+        'positive':resp['result']['Postive']
+    });
     }
     catch(error){
       print(error);
     }
-    
     notifyListeners();
   }
 }

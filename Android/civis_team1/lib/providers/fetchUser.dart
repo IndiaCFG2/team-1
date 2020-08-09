@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 class FetchUser with ChangeNotifier{
   var userFetched;
   Future<void> fetchUser(uid) async{
-    var user =await Firestore.instance.collection('users').document(uid).get();
+    DocumentSnapshot user =await Firestore.instance.collection('users').document(uid).get();
     print("provider for fetching user:--");
     userFetched=user;
+    print(user.data.toString());
     notifyListeners();
   }
 }
