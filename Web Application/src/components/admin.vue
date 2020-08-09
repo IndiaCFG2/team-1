@@ -7,7 +7,7 @@
     <mdb-navbar-toggler>
       <mdb-navbar-nav right>
         <router-link to="/admin"><mdb-nav-item href="#" active>Admin Home</mdb-nav-item></router-link>
-        <router-link to="/admin/graphs1"><mdb-nav-item href="#">Visualisation</mdb-nav-item></router-link>
+        <router-link to="/admin/graphs1"><mdb-nav-item href="#">Analytics</mdb-nav-item></router-link>
         <router-link to="/"><mdb-nav-item href="#">Log Out</mdb-nav-item></router-link>
       </mdb-navbar-nav>
     </mdb-navbar-toggler>

@@ -1,7 +1,9 @@
 <template>
 <div class="grap"><h3>Sentimental FeedBack</h3>
 <column-chart :data="[['Positive', 32], ['Neutral', 46], ['Negative', 28]]" style="padding-top:40px;"></column-chart>
+<h4>The bar graph gives a sentimental response to the feedback from the user. </h4>
 <scatter-chart :data="[[1, 190], [2,200], [3,150]]" xtitle="Policy" ytitle="Population" style="padding-top:40px;"></scatter-chart>
+<h4> The scatter-plot gives the information about the Population who have selected certain policy. </h4>
 </div>
 </template>
 
