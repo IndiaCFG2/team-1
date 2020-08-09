@@ -1,6 +1,6 @@
 # Mobile Application
 
-A mobile Applcation where in user can see the governemment policies and give feedback 
+A mobile Applcation where in user can see the Governemment policies and give feedback 
 
 ## Mobile Application Architecture
 
